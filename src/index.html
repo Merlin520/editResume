@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/resume.css">
     <link rel="stylesheet" href="css/editable-span.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>简历编辑器</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
             <div class="upper">
                 <ul class="actions">
                     <li>
-                        <button class="button">保存</button>
+                        <button class="button" @click="onClickSave">保存</button>
                     </li>
                     <li>
                         <button class="button">分享</button>
@@ -32,6 +33,7 @@
         </aside>
         <main>
             <div class="resume">
+                {{resume}}
                 <section class="profile">
                     <h1>
                         <editable-span v-bind:value = "resume.name" v-on:edit = "onEdit('name',$event)">
@@ -139,6 +141,43 @@
                 </section>
             </div>
         </main>
+        <div v-show="loginVisible" class="login">
+            <form class="form">
+                <h2>登录</h2>
+                <button @click="loginVisible = false">关闭</button>
+                <div class="row">
+                    <lable>邮箱</lable>
+                    <input type="text">
+                </div>
+                <div class="row">
+                    <lable>密码</lable>
+                    <input type="text">
+                </div>
+                <div class="actions">
+                    <button>提交</button>
+                    <a href="#" @click="signUpVisible = true">注册</a>
+                </div>
+            </form>
+        </div>
+        <div v-show="signUpVisible" class="signUp">
+            <form class="form">
+                <h2>登录</h2>
+                <button @click="loginVisible = false">关闭</button>
+                <div class="row">
+                    <lable>邮箱</lable>
+                    <input type="text">
+                </div>
+                <div class="row">
+                    <lable>密码</lable>
+                    <input type="text">
+                </div>
+                <div class="actions">
+                    <button>提交</button>
+                    <a href="#">注册</a>
+                </div>
+            </form>
+
+        </div>
     </div>
 
     <script src="../vendors/av-min.js"></script>
