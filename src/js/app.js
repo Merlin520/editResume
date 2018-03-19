@@ -11,6 +11,16 @@ let app = new Vue({
             jobTitle:'前段开发',
             phone:'1231241515',
             email:'erwer@12312.com'
+        },
+
+        login:{
+            email:'',
+            password:''
+        },
+
+        signUp:{
+            email:'',
+            password:''
         }
     },
     methods:{
@@ -18,8 +28,38 @@ let app = new Vue({
             this.resume[key] = value
         },
 
+        onLogin(e){
+            AV.User.logIn(this.login.email, this.login.password).then(function (user) {
+                console.log(user);
+            }, function (error) {
+                if(error.code ===211){
+                    alert('邮箱不存在')
+                }else if(error.code === 210){
+                    alert('邮箱密码不匹配')
+                }
+            });
+        },
+
+        onSignUp(e){
+            console.log(this.signUp);
+            // 新建 AVUser 对象实例
+            const user = new AV.User();
+            // 设置用户名
+            user.setUsername(this.signUp.email);
+            // 设置密码
+            user.setPassword(this.signUp.password);
+            // 设置邮箱
+            user.setEmail(this.signUp.email);
+            user.signUp().then(function (user) {
+                console.log(user);
+            }, function (error) {
+            });
+        },
+
+
         onClickSave(){
             let currentUser = AV.User.current();
+
             if(!currentUser){
                 this.loginVisible = true
             }else{
@@ -28,6 +68,13 @@ let app = new Vue({
         },
 
         saveResume(){
+            // 第一个参数是 className，第二个参数是 objectId
+            let {id} = AV.User.current();
+            let user = AV.Object.createWithoutData('User', id);
+            // 修改属性
+            user.set('resume', this.resume);
+            // 保存到云端
+            user.save();
 
         }
     }
