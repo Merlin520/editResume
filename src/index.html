@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/resume.css">
     <link rel="stylesheet" href="css/editable-span.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/signUp.css">
     <title>简历编辑器</title>
 </head>
 <body>
@@ -155,13 +156,13 @@
                 </div>
                 <div class="actions">
                     <button>提交</button>
-                    <a href="#" @click="signUpVisible = true">注册</a>
+                    <a href="#" @click="signUpVisible = true;loginVisible = false " >注册</a>
                 </div>
             </form>
         </div>
         <div v-show="signUpVisible" class="signUp">
             <form class="form">
-                <h2>登录</h2>
+                <h2>注册</h2>
                 <button @click="loginVisible = false">关闭</button>
                 <div class="row">
                     <lable>邮箱</lable>
@@ -173,7 +174,7 @@
                 </div>
                 <div class="actions">
                     <button>提交</button>
-                    <a href="#">注册</a>
+                    <a href="#" @click="signUpVisible = false;loginVisible = true">登录</a>
                 </div>
             </form>
 
