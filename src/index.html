@@ -34,7 +34,6 @@
         </aside>
         <main>
             <div class="resume">
-                {{resume}}
                 <section class="profile">
                     <h1>
                         <editable-span v-bind:value = "resume.name" v-on:edit = "onEdit('name',$event)">
@@ -142,7 +141,7 @@
                 </section>
             </div>
         </main>
-        <div v-show="loginVisible" class="login">
+        <div v-show="loginVisible" class="login" v-cloak>
             <form class="form" @submit.prevent="onLogin">
                 <h2>登录</h2>
                 <button @click="loginVisible = false">关闭</button>
@@ -160,7 +159,7 @@
                 </div>
             </form>
         </div>
-        <div v-show="signUpVisible" class="signUp">
+        <div v-show="signUpVisible" class="signUp" v-cloak>
             <form class="form" @submit.prevent="onSignUp">
                 <h2>注册</h2>
                 <button @click="loginVisible = false">关闭</button>
