@@ -40,6 +40,12 @@ let app = new Vue({
             });
         },
 
+        onLogout(e){
+            AV.User.logOut();
+            alert('注销成功')
+            window.location.reload();
+        },
+
         onSignUp(e){
             console.log(this.signUp);
             // 新建 AVUser 对象实例
