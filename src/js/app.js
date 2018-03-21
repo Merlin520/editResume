@@ -4,6 +4,10 @@ let app = new Vue({
         editingName:false,
         loginVisible:false,
         signUpVisible:false,
+        currentUser:{
+            id:undefined,
+            email:''
+        },
         resume:{
             name:'姓名',
             gender:'女',
@@ -29,9 +33,10 @@ let app = new Vue({
         },
 
         onLogin(e){
-            AV.User.logIn(this.login.email, this.login.password).then(function (user) {
-                console.log(user);
-            }, function (error) {
+            AV.User.logIn(this.login.email, this.login.password).then((user) => {
+                this.currentUser.id = user.id;
+                this.currentUser.email = user.attributes.email;
+            }, (error) => {
                 if(error.code ===211){
                     alert('邮箱不存在')
                 }else if(error.code === 210){
@@ -47,18 +52,13 @@ let app = new Vue({
         },
 
         onSignUp(e){
-            console.log(this.signUp);
-            // 新建 AVUser 对象实例
             const user = new AV.User();
-            // 设置用户名
             user.setUsername(this.signUp.email);
-            // 设置密码
             user.setPassword(this.signUp.password);
-            // 设置邮箱
             user.setEmail(this.signUp.email);
-            user.signUp().then(function (user) {
-                console.log(user);
-            }, function (error) {
+            user.signUp().then((user) => {
+
+            }, (error) => {
             });
         },
 
@@ -84,4 +84,9 @@ let app = new Vue({
 
         }
     }
-})
+});
+
+let currentUser = AV.User.current();
+if(currentUser){
+    app.currentUser = currentUser
+}

@@ -15,6 +15,7 @@
             <div class="upper">
                 <ul class="actions">
                     <li>
+                        <!--{{currentUser}}-->
                         <button class="button" @click="onClickSave">保存</button>
                     </li>
                     <li>
@@ -29,12 +30,13 @@
                 </ul>
             </div>
             <div class="down">
-                <button class="button" @click="onLogout">登出</button>
+                <button class="button" @click="onLogout" v-show="!!currentUser.id">登出</button>
             </div>
         </aside>
         <main>
             <div class="resume">
                 <section class="profile">
+                    {{currentUser}}
                     <h1>
                         <editable-span v-bind:value = "resume.name" v-on:edit = "onEdit('name',$event)">
                         </editable-span>
