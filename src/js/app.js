@@ -20,7 +20,10 @@ let app = new Vue({
                 {name:'请填写技能名称',description:'请填写技能描述'},
                 {name:'请填写技能名称',description:'请填写技能描述'},
                 {name:'请填写技能名称',description:'请填写技能描述'},
-
+            ],
+            projects:[
+                {name:'请填写项目名称',link:'http://...',keywords:'请填写关键词',description:'请填写描述'},
+                {name:'请填写项目名称',link:'http://...',keywords:'请填写关键词',description:'请填写描述'},
             ]
         },
 
