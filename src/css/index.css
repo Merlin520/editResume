@@ -76,9 +76,15 @@ div[v-cloak] {
     padding: 4px 10px;
 }
 
+.skills > ul > li {
+    position:relative;
+}
 
-
-
+.skills > ul > li .remove {
+    position:absolute;
+    top: 0;
+    right: 0;
+}
 
 
 
