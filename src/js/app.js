@@ -138,9 +138,16 @@ let app = new Vue({
 
         removeSkill(index){
             this.resume.skills.splice(index,1)
-        }
+        },
 
-
+        addProject(){
+            this.resume.projects.push(
+                {name:'请填写项目名称',link:'http://...',keywords:'请填写关键词',description:'请填写描述'},
+                )
+        },
+        removeProject(index){
+            this.resume.projects.splice(index,1)
+        },
 
     }
 });
