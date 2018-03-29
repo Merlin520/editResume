@@ -149,13 +149,14 @@
             </form>
         </div>
         <div v-show="shareVisible" class="share" v-cloak>
-            <input type="text" :value="shareLink">
+            <h2>
+                请将下面链接分享给面试官
+            </h2>
+            <div>
+                <textarea readonly>{{shareLink}}</textarea>
+            </div>
         </div>
-        <!--<h2>-->
-           <!--请将下列链接分享给面试官-->
-        <!--</h2>-->
-        <!--<div>-->
-        <!--</div>-->
+
     </div>
     <script src="../vendors/av-min.js"></script>
     <script src="./js/av.js"></script>
