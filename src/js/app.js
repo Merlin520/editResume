@@ -5,6 +5,28 @@ let app = new Vue({
         loginVisible:false,
         signUpVisible:false,
         shareVisible:false,
+        previewUser:{
+          objectId:undefined,
+        },
+        previewResume:{
+            name:'姓名',
+            gender:'女',
+            birthday:'1993年1月',
+            jobTitle:'前段开发',
+            phone:'1231241515',
+            email:'erwer@12312.com',
+            skills:[
+                {name:'请填写技能名称',description:'请填写技能描述'},
+                {name:'请填写技能名称',description:'请填写技能描述'},
+                {name:'请填写技能名称',description:'请填写技能描述'},
+                {name:'请填写技能名称',description:'请填写技能描述'},
+            ],
+            projects:[
+                {name:'请填写项目名称',link:'http://...',keywords:'请填写关键词',description:'请填写描述'},
+                {name:'请填写项目名称',link:'http://...',keywords:'请填写关键词',description:'请填写描述'},
+            ]
+
+        },
         currentUser:{
             objectId:undefined,
             email:''
@@ -38,9 +60,27 @@ let app = new Vue({
             password:''
         },
 
-        shareLink:'不知道'
-
+        shareLink:'不知道',
+        mode:'edit'//'preview'
     },
+
+    computed:{
+      displayResume(){
+        return this.mode === 'preview' ? this.previewResume : this.resume
+      }
+    },
+
+    watch:{
+      'currentUser.objectId':function (newValue,oldValue) {
+          if(newValue){
+              this.getResume(this.currentUser)
+          }
+      }
+    },
+
+
+
+
     methods:{
         onEdit(key,value){
             // this.resume[key] = value
@@ -59,8 +99,6 @@ let app = new Vue({
             result = value;
         },
         hasLogin(){
-            console.log('call2');
-            console.log(this.currentUser.objectId);
             return !!this.currentUser.objectId
         },
 
@@ -125,12 +163,13 @@ let app = new Vue({
 
         },
 
-        getResume(){
+        getResume(user){
             var query = new AV.Query('User');
-            query.get(this.currentUser.objectId).then( (user)=> {
+           return query.get(user.objectId).then( (user)=> {
                 let resume = user.toJSON().resume;
-                Object.assign(this.resume,resume)//右边属性复制给左边，右边无，则保留左边
-                // this.resume = resume;
+                // Object.assign(this.resume,resume)//右边属性复制给左边，右边无，则保留左边
+                // // this.resume = resume;
+                return resume
             },  (error)=> {
                 // 异常处理
             });
@@ -156,9 +195,44 @@ let app = new Vue({
     }
 });
 
+
+
+//获取当前用户
 let currentUser = AV.User.current();
 if(currentUser){
     app.currentUser = currentUser.toJSON();
-    app.shareLink = location.origin + location.pathname + '?user_id=' + app.currentUser.objectId
-    app.getResume();
+    app.shareLink = location.origin + location.pathname + '?user_id=' + app.currentUser.objectId;
+    console.log('1111'+ app.currentUser.objectId);
+    app.getResume(app.currentUser).then(resume => {
+        app.resume = resume
+    })
+
+
 }
+
+//获取预览用户的id
+let search = location.search;
+let regex = /user_id=([^&]+)/;
+let matches = search.match(regex);
+let userId;
+if(matches){
+    userId = matches[1];
+   app.mode = 'preview';
+    app.getResume({objectId: userId}).then(resume =>{
+        app.previewResume = resume
+    })
+}
+
+// if(userId) {
+//     app.getResume({objectId: userId});
+// }else {
+//     app.getResume(app.currentUser)
+// }
+
+
+
+
+
+
+
+
