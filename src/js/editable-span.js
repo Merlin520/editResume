@@ -18,4 +18,4 @@ Vue.component('editable-span', {
             this.$emit('edit',e.target.value)
         }
     }
-})
+});

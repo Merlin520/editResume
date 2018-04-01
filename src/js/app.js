@@ -51,15 +51,15 @@ let app = new Vue({
             ]
         },
 
-        login:{
-            email:'',
-            password:''
-        },
+        // login:{
+        //     email:'',
+        //     password:''
+        // },
 
-        signUp:{
-            email:'',
-            password:''
-        },
+        // signUp:{
+        //     email:'',
+        //     password:''
+        // },
 
         shareLink:'不知道',
         mode:'edit',//'preview'
@@ -104,20 +104,20 @@ let app = new Vue({
             return !!this.currentUser.objectId
         },
 
-        onLogin(e){
-            AV.User.logIn(this.login.email, this.login.password).then((user) => {
-                user = user.toJSON();
-                this.currentUser.objectId = user.objectId;
-                this.currentUser.email = user.email;
-                this.loginVisible = false;
-            }, (error) => {
-                if(error.code ===211){
-                    alert('邮箱不存在')
-                }else if(error.code === 210){
-                    alert('邮箱密码不匹配')
-                }
-            });
-        },
+        // onLogin(e){
+        //     AV.User.logIn(this.login.email, this.login.password).then((user) => {
+        //         user = user.toJSON();
+        //         this.currentUser.objectId = user.objectId;
+        //         this.currentUser.email = user.email;
+        //         this.loginVisible = false;
+        //     }, (error) => {
+        //         if(error.code ===211){
+        //             alert('邮箱不存在')
+        //         }else if(error.code === 210){
+        //             alert('邮箱密码不匹配')
+        //         }
+        //     });
+        // },
 
         onLogout(e){
             AV.User.logOut();
@@ -125,22 +125,22 @@ let app = new Vue({
             window.location.reload();
         },
 
-        onSignUp(e){
-            const user = new AV.User();
-            user.setUsername(this.signUp.email);
-            user.setPassword(this.signUp.password);
-            user.setEmail(this.signUp.email);
-            user.signUp().then((user) => {
-
-            user = user.toJSON();
-            this.currentUser.objectId = user.objectId;
-            this.currentUser.email = user.email;
-            this.signUpVisible= false;
-                alert('注册成功')
-            }, (error) => {
-                alert(error.rawMessage)
-            });
-        },
+        // onSignUp(e){
+        //     const user = new AV.User();
+        //     user.setUsername(this.signUp.email);
+        //     user.setPassword(this.signUp.password);
+        //     user.setEmail(this.signUp.email);
+        //     user.signUp().then((user) => {
+        //
+        //     user = user.toJSON();
+        //     this.currentUser.objectId = user.objectId;
+        //     this.currentUser.email = user.email;
+        //     this.signUpVisible= false;
+        //         alert('注册成功')
+        //     }, (error) => {
+        //         alert(error.rawMessage)
+        //     });
+        // },
 
 
         onClickSave(){
@@ -198,9 +198,9 @@ let app = new Vue({
             window.print()
         },
 
-        setTheme(name){
-            document.body.className = name
-        }
+        // setTheme(name){
+        //     document.body.className = name
+        // }
 
     }
 });
