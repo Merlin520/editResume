@@ -192,6 +192,10 @@ let app = new Vue({
             this.resume.projects.splice(index,1)
         },
 
+        print(){
+            window.print()
+        }
+
     }
 });
 
