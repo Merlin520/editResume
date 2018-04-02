@@ -159,10 +159,10 @@
             <!--</div>-->
         <!--</div>-->
 
-        <login v-show="loginVisible"></login>
-        <share v-show="shareVisible"></share>
-        <signUp v-show="signUpVisible"></signUp>
-        <skinPicker v-show="skinPickerVisible"></skinPicker>
+        <login v-show="loginVisible" @close="loginVisible=false"></login>
+        <share v-bind:share-link="shareLink" v-show="shareVisible"></share>
+        <sign-up v-show="signUpVisible"></sign-up>
+        <skin-picker v-show="skinPickerVisible"></skin-picker>
 
         <button class="exitPreview" @click="mode = 'edit'" v-if="mode === 'preview'">退出预览</button>
         <!--<div v-show="skinPickerVisible" class="skinPicker">-->

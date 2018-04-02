@@ -1,10 +1,13 @@
 Vue.component('signUp',{
-    data:{
-        signUp:{
-            email:'',
-            password:''
-        },
+    data(){
+        return {
+            signUp:{
+                email:'',
+                password:''
+            },
+        }
     },
+
 
     methods:{
         onSignUp(e){

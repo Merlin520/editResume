@@ -5,6 +5,7 @@ let app = new Vue({
         loginVisible:false,
         signUpVisible:false,
         shareVisible:false,
+        shareLink:'',
         skinPickerVisible:false,
         previewUser:{
           objectId:undefined,
@@ -87,7 +88,7 @@ let app = new Vue({
         onEdit(key,value){
             // this.resume[key] = value
             let regex = /\[(\d+)\]/g
-            key = key.replace(regex,(match,number)=> `.${number}`)
+            key = key.replace(regex,(match,number)=> `.${number}`);
             keys = key.split('.')
             let result = this.resume
             for(let i = 0;i<key.length;i++){
