@@ -23,7 +23,7 @@
                         <button class="button" @click="onClickSave">保存</button>
                     </li>
                     <li>
-                        <button class="button" @click="shareVisible = true">分享</button>
+                        <button class="button" @click="onShare">分享</button>
                     </li>
                     <li>
                         <button class="button" @click="print">打印</button>
@@ -159,7 +159,7 @@
             <!--</div>-->
         <!--</div>-->
 
-        <login v-show="loginVisible" @close="loginVisible=false"></login>
+        <login v-show="loginVisible" @close="loginVisible=false" @login="onLogin"></login>
         <share v-bind:share-link="shareLink" v-show="shareVisible"></share>
         <sign-up v-show="signUpVisible"></sign-up>
         <skin-picker v-show="skinPickerVisible"></skin-picker>

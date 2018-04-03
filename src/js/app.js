@@ -62,7 +62,7 @@ let app = new Vue({
         //     password:''
         // },
 
-        shareLink:'不知道',
+        // shareLink:'不知道',
         mode:'edit',//'preview'
         // mainClass:'default'
     },
@@ -76,7 +76,7 @@ let app = new Vue({
     watch:{
       'currentUser.objectId':function (newValue,oldValue) {
           if(newValue){
-              this.getResume(this.currentUser)
+              this.getResume(this.currentUser).then((resume) => this.resume = resume)
           }
       }
     },
@@ -85,6 +85,18 @@ let app = new Vue({
 
 
     methods:{
+        onShare(){
+           if(this.hasLogin()){
+               this.shareVisible = true
+           }else {
+               alert('请先登录')
+           }
+        },
+        onLogin(user){
+            this.currentUser.objectId = user.objectId;
+            this.currentUser.email = user.email;
+            this.loginVisible = false
+        },
         onEdit(key,value){
             // this.resume[key] = value
             let regex = /\[(\d+)\]/g
