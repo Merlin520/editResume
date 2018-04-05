@@ -225,7 +225,7 @@ let currentUser = AV.User.current();
 if(currentUser){
     app.currentUser = currentUser.toJSON();
     app.shareLink = location.origin + location.pathname + '?user_id=' + app.currentUser.objectId;
-    console.log('1111'+ app.currentUser.objectId);
+    // console.log('1111'+ app.currentUser.objectId);
     app.getResume(app.currentUser).then(resume => {
         app.resume = resume
     })
